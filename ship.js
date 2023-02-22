@@ -1,8 +1,27 @@
-export function sayHi() {
-  console.log('hi');
-  return 1;
+class Ship {
+
+  constructor(shipLength) {
+    this.shipLength = shipLength;
+    this.timesHit = 0;
+  }
+
+  sayHi() {
+    console.log(this);
+  }
+
+  hit() {
+    this.timesHit += 1;
+  }
+
+  isSunk() {
+    return (this.shipLength === this.timesHit);
+  }
+
 }
 
-export function sayhi2() {
-  return 2;
-}
+// Usage:
+export const ship = new Ship(3);
+export const ship2 = new Ship(6);
+ship.hit();
+ship.hit();
+ship.hit();
