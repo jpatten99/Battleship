@@ -19,9 +19,10 @@
 
 // }
 
-export function shipFactory(shipLength) {
+export function shipFactory(shipLength, shipName) {
   return {
     shipLength,
+    shipName,
     timesHit: 0,
     hit() {
       // eslint-disable-next-line no-plusplus
