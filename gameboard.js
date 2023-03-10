@@ -8,7 +8,7 @@ function gameBoardFactory() {
     const itemAsString = JSON.stringify(item);
     const contains = arr.some((ele) =>JSON.stringify(ele) === itemAsString);
     return contains;
-  }
+  };
   return {
     coordinates:[
                   [null, null, null, null, null, null, null],
@@ -98,9 +98,15 @@ function gameBoardFactory() {
       this.coordinates[y][x] = "hit";
       return "hit";
     },
+    checkIfAllSunk() {
+      let hitCounter = 0;
+      for(let i = 0; i < 5; i++) {
+        hitCounter += this.arsenal[i].timesHit;
+      }
+      return hitCounter === 17;
+    },
   };
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export const testGameBoard = gameBoardFactory();
-testGameBoard.placeShipHorizontally(0, 0, 3, "ship1");
