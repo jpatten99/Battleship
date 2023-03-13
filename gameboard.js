@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/extensions
 import {shipFactory} from "./ship.js";
 
-function gameBoardFactory() {
+export function gameBoardFactory() {
   // Based off of mohamed-ibrahim's answer at https://stackoverflow.com/questions/41661287/how-to-check-if-an-array-contains-another-array 
   function isArrayInArray(arr, item){
     const itemAsString = JSON.stringify(item);
@@ -78,6 +78,9 @@ function gameBoardFactory() {
       return "ERROR-hit edge";
     },
     receiveAttack(y, x) {
+      if(!(Number.isInteger(y) && Number.isInteger(x))){
+        return "error-invalid type";
+      }
       if(y > 6 || y < 0 || x > 6 || x < 0){
         return "error-invalid coordinates";
       }
