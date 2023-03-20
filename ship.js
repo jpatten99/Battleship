@@ -1,24 +1,4 @@
-// export class Ship {
-
-//   constructor(shipLength) {
-//     this.shipLength = shipLength;
-//     this.timesHit = 0;
-//   }
-
-//   sayHi() {
-//     console.log(this);
-//   }
-
-//   hit() {
-//     this.timesHit += 1;
-//   }
-
-//   isSunk() {
-//     return (this.shipLength === this.timesHit);
-//   }
-
-// }
-
+// eslint-disable-next-line import/prefer-default-export
 export function shipFactory(shipLength, shipName) {
   return {
     shipLength,
@@ -33,6 +13,3 @@ export function shipFactory(shipLength, shipName) {
     },
   };
 }
-
-// Usage:
-export const testShip = shipFactory(3);
