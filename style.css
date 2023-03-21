@@ -15,7 +15,7 @@ body {
 
 #gameBoardsContainer{
   height: 90%;
-  background-color: darkblue;
+  background-color: blue;
   display: flex;
   justify-content: space-around;
   align-items: center;
