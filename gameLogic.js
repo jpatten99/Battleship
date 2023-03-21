@@ -37,12 +37,16 @@ export function onClickFunction(i, j) {
     renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
     if(computerGameBoard.checkIfAllSunk()){
       alert("Joshua wins");
+      clickEnabled = false;
+      return;
     }
-    delay(2500).then(() => {
+    delay(100).then(() => {
       computer.sendRandomAttack(joshuaGameBoard);
       renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
       if(joshuaGameBoard.checkIfAllSunk()){
         alert("Computer wins");
+        clickEnabled = false;
+        return;
       }
       clickEnabled = true;   
     });
