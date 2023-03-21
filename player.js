@@ -23,5 +23,3 @@ export function playerFactory(playerName = "computer") {
     },
   };
 }
-
-const josh = playerFactory("josh");
