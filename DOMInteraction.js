@@ -1,5 +1,5 @@
-import {joshua} from "./gameLogic.js";
-import {computerGameBoard, joshuaGameBoard, clickFunction} from "./gameLogic.js";
+// eslint-disable-next-line import/no-cycle, import/extensions
+import {onClickFunction} from "./gameLogic.js";
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderGameBoards = (inputArray1, inputArray2) => {
@@ -23,9 +23,6 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
         default:
           myDiv.style.backgroundColor = "black";
       }
-      // myDiv.classList.add(i);
-      // myDiv.classList.add(j);
-      
       myGameBoard.appendChild(myDiv);
     }
   }
@@ -38,8 +35,7 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
         case null:
           myDiv.style.backgroundColor = "gray";
           myDiv.onclick = () => {
-            joshua.sendAttack(computerGameBoard, i, j);
-            clickFunction();
+            onClickFunction(i, j);
           };
           break;
         case "miss":
@@ -53,20 +49,11 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
         default:
           myDiv.style.backgroundColor = "gray";
           myDiv.onclick = () => {
-            joshua.sendAttack(computerGameBoard, i, j);
-            clickFunction();
+            onClickFunction(i, j);
           };
       }
-      // myDiv.classList.add(i);
-      // myDiv.classList.add(j);
       computerGameBoard2.appendChild(myDiv);
     }
   }
 };
-
-const testBTN = document.getElementById('testBTN');
-testBTN.innerText = "TEST";
-testBTN.addEventListener('click', () =>{
-  renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
-});
 

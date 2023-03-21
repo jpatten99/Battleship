@@ -2,11 +2,16 @@
 /* eslint-disable no-alert */
 import {playerFactory} from "./player.js";
 import {gameBoardFactory} from "./gameboard.js";
-import { renderGameBoards} from "./DOMInteraction.js";
+// eslint-disable-next-line import/no-cycle
+import {renderGameBoards} from "./DOMInteraction.js";
 
-let turnCounter = 2;
+function delay(time) {
+  // eslint-disable-next-line no-promise-executor-return
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 export const joshua = playerFactory("Joshua");
-const computer = playerFactory();
+export const computer = playerFactory();
 export const joshuaGameBoard = gameBoardFactory();
 joshuaGameBoard.placeShipHorizontally(0, 0, 5, "carrier");
 joshuaGameBoard.placeShipHorizontally(2, 0, 4, "battleship");
@@ -23,47 +28,24 @@ computerGameBoard.placeShipHorizontally(5, 4, 2, "carrier");
 
 renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
 
+let clickEnabled = true;
 
-export const clickFunction = () => {
-  renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
-  if(computerGameBoard.checkIfAllSunk()) {
-    alert("Joshua wins!");
-  }
-  setTimeout(() => {
-    console.log("pause");
-  }, 2000);
-  computer.sendRandomAttack(joshuaGameBoard);
-  renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
-  if(joshuaGameBoard.checkIfAllSunk()) {
-    alert("Computer wins!");
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-// pre-game is complete, begin game logic
-async function gameLoop() {
-  renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
-  while(!joshuaGameBoard.checkIfAllSunk() && !computerGameBoard.checkIfAllSunk()){
-    if(turnCounter % 2 === 0){
-    }
-    else{
-      computer.sendRandomAttack(joshuaGameBoard);
-    }
+export function onClickFunction(i, j) {
+  if(clickEnabled) {
+    clickEnabled = false;
+    joshua.sendAttack(computerGameBoard, i, j);
     renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
-    turnCounter += 1;
+    if(computerGameBoard.checkIfAllSunk()){
+      alert("Joshua wins");
+    }
+    delay(2500).then(() => {
+      computer.sendRandomAttack(joshuaGameBoard);
+      renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+      if(joshuaGameBoard.checkIfAllSunk()){
+        alert("Computer wins");
+      }
+      clickEnabled = true;   
+    });
+    
   }
-  
-  if(joshuaGameBoard.checkIfAllSunk()) {
-    alert("Computer wins");
-  }
-  else {alert("Joshua wins");}
 }
