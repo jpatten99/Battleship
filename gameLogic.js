@@ -13,18 +13,17 @@ function delay(time) {
 export const joshua = playerFactory("Joshua");
 export const computer = playerFactory();
 export const joshuaGameBoard = gameBoardFactory();
-joshuaGameBoard.placeShipHorizontally(0, 0, 5, "carrier");
-joshuaGameBoard.placeShipHorizontally(2, 0, 4, "battleship");
-joshuaGameBoard.placeShipHorizontally(3, 0, 3, "cruiser");
-joshuaGameBoard.placeShipHorizontally(4, 0, 3, "submarine");
-joshuaGameBoard.placeShipHorizontally(5, 4, 2, "carrier");
+joshua.placeShipRandom(joshuaGameBoard, "carrier", 5);
+joshua.placeShipRandom(joshuaGameBoard, "battleship", 4);
+joshua.placeShipRandom(joshuaGameBoard, "cruiser", 3);
+joshua.placeShipRandom(joshuaGameBoard, "submarine", 3);
+joshua.placeShipRandom(joshuaGameBoard, "destroyer", 2);
 export const computerGameBoard = gameBoardFactory();
-computerGameBoard.placeShipHorizontally(0, 0, 5, "carrier");
-computerGameBoard.placeShipHorizontally(2, 0, 4, "battleship");
-computerGameBoard.placeShipHorizontally(3, 0, 3, "cruiser");
-computerGameBoard.placeShipHorizontally(4, 0, 3, "submarine");
-computerGameBoard.placeShipHorizontally(5, 4, 2, "carrier");
-
+computer.placeShipRandom(computerGameBoard, "carrier", 5);
+computer.placeShipRandom(computerGameBoard, "battleship", 4);
+computer.placeShipRandom(computerGameBoard, "cruiser", 3);
+computer.placeShipRandom(computerGameBoard, "submarine", 3);
+computer.placeShipRandom(computerGameBoard, "destroyer", 2);
 
 renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
 
