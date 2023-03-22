@@ -27,7 +27,7 @@ export function gameBoardFactory() {
         return "ERROR-Invalid coordinate(s)";
       }
       // Make sure length is valid
-      if(length < 1 || length > 5){
+      if(length < 2 || length > 5){
         return "ERROR-Invalid length";
       }
       // Check if ship will run out of spaces
@@ -37,7 +37,36 @@ export function gameBoardFactory() {
           if(this.coordinates[y][x + i] != null){
             return "ERROR-space already taken";
           }
+          // Begin top check
+          if(y > 0) {
+            if(this.coordinates[y - 1][x + i] != null){
+              return "ERROR-overlap";
+            }  
+          }
+          // Begin bottom check
+          if(y < 6) {
+            if(this.coordinates[y + 1][x + i] != null){
+              return "ERROR-overlap";
+            }  
+          }
         }
+        // Begin left check
+        // We don't need to check left if the x coordinate is 0 because it doesn't exist 
+        if(x > 0){
+          // Left must be null to prevent overlap
+          if((this.coordinates[y][x-1]) != null){
+            return "ERROR-overlap";
+          }
+        }
+        // Begin right check
+        // We don't need to check right ship is on right edge
+        if((x + length) < 7){
+          // right must be null to prevent overlap
+          if((this.coordinates[y][x + length]) != null){
+            return "ERROR-overlap";
+          }
+        }
+
         // When this code is reached, we know the ship won't run over the edge and the spaces on the board aren't already taken
         const tempShip = shipFactory(length, shipName);
         for(let i = 0; i < length; i++){
@@ -55,7 +84,7 @@ export function gameBoardFactory() {
         return "ERROR-Invalid coordinate(s)";
       }
       // Make sure length is valid
-      if(length < 1 || length > 5){
+      if(length < 2 || length > 5){
         return "ERROR-Invalid length";
       }
       // Check if ship will run out of spaces
@@ -64,6 +93,34 @@ export function gameBoardFactory() {
         for(let i = 0; i < length; i++){
           if(this.coordinates[y + i][x] != null){
             return "ERROR-space already taken";
+          }
+          // Begin left check
+          if(x > 0) {
+            if(this.coordinates[y + i][x - 1] != null){
+              return "ERROR-overlap";
+            }  
+          }
+          // Begin right check
+          if(x < 6) {
+            if(this.coordinates[y + i][x + 1] != null){
+              return "ERROR-overlap";
+            }  
+          }
+        }
+        // Begin top check
+        // We don't need to check top if the y coordinate is 0 because it doesn't exist 
+        if(y > 0){
+          // bottom must be null to prevent overlap
+          if((this.coordinates[y - 1][x]) != null){
+            return "ERROR-overlap";
+          }
+        }
+        // Begin bottom check
+        // We don't need to check bottom ship if on bottom edge
+        if((y + length) < 7){
+          // bottom must be null to prevent overlap
+          if((this.coordinates[y + length][x]) != null){
+            return "ERROR-overlap";
           }
         }
         // When this code is reached, we know the ship won't run over the edge and the spaces on the board aren't already taken
