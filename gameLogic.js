@@ -36,14 +36,14 @@ computer.placeShipRandom(computerGameBoard, "cruiser", 3);
 computer.placeShipRandom(computerGameBoard, "submarine", 3);
 computer.placeShipRandom(computerGameBoard, "destroyer", 2);
 
-renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+renderGameBoards(joshuaGameBoard, computerGameBoard);
 
 let enemyClickEnabled = false;
 export function enemyOnClickFunction(i, j) {
   if(enemyClickEnabled) {
     enemyClickEnabled = false;
     joshua.sendAttack(computerGameBoard, i, j);
-    renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+    renderGameBoards(joshuaGameBoard, computerGameBoard);
     if(computerGameBoard.checkIfAllSunk()){
       alert("Joshua wins");
       enemyClickEnabled = false;
@@ -51,7 +51,7 @@ export function enemyOnClickFunction(i, j) {
     }
     delay(100).then(() => {
       computer.sendRandomAttack(joshuaGameBoard);
-      renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+      renderGameBoards(joshuaGameBoard, computerGameBoard);
       if(joshuaGameBoard.checkIfAllSunk()){
         alert("Computer wins");
         enemyClickEnabled = false;
@@ -114,7 +114,7 @@ export function ownOnClickFunction(i, j) {
   }
 
   if(flag === "success"){
-    renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+    renderGameBoards(joshuaGameBoard, computerGameBoard);
     ownClickEnabled++;
   }
   

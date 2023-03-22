@@ -155,7 +155,7 @@ export function gameBoardFactory() {
       }
       // has to be a hit
       this.coordinates[y][x].hit();
-      this.coordinates[y][x] = "hit";
+      this.coordinates[y][x] = `hit${this.coordinates[y][x].shipName}`;
       return "hit";
     },
     checkIfAllSunk() {
