@@ -107,6 +107,7 @@ export function ownOnClickFunction(i, j) {
         flag = joshuaGameBoard.placeShipVertically(i, j, 2, "destroyer");
       }
       enemyClickEnabled = true;
+      document.getElementById("quick-tip").innerText = "";
       break;
     default:
       console.log("hello");
