@@ -52,10 +52,9 @@ export function playerFactory(playerName = "computer") {
                 }
               }
             }
-            return "failed";
           }
         }
-        return "success";
+        return "failed";
       }
       let y = getRandomArbitrary(0, 7);
       let x = getRandomArbitrary(0, 7);
@@ -84,10 +83,9 @@ export function playerFactory(playerName = "computer") {
                 }
               }
             }
-          return "failed";
         }
       }
-      return "success";
+      return "failed";
     }
   };
 }
