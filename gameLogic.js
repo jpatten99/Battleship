@@ -10,14 +10,25 @@ function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
+
+let direction = 2;
+document.body.onkeyup = function(e) {
+  if (e.key == " " ||
+      e.code == "Space" ||      
+      e.keyCode == 32      
+  ) {
+    direction++;
+  }
+};
+
 export const joshua = playerFactory("Joshua");
 export const computer = playerFactory();
 export const joshuaGameBoard = gameBoardFactory();
-joshua.placeShipRandom(joshuaGameBoard, "carrier", 5);
-joshua.placeShipRandom(joshuaGameBoard, "battleship", 4);
-joshua.placeShipRandom(joshuaGameBoard, "cruiser", 3);
-joshua.placeShipRandom(joshuaGameBoard, "submarine", 3);
-joshua.placeShipRandom(joshuaGameBoard, "destroyer", 2);
+// joshua.placeShipRandom(joshuaGameBoard, "carrier", 5);
+// joshua.placeShipRandom(joshuaGameBoard, "battleship", 4);
+// joshua.placeShipRandom(joshuaGameBoard, "cruiser", 3);
+// joshua.placeShipRandom(joshuaGameBoard, "submarine", 3);
+// joshua.placeShipRandom(joshuaGameBoard, "destroyer", 2);
 export const computerGameBoard = gameBoardFactory();
 computer.placeShipRandom(computerGameBoard, "carrier", 5);
 computer.placeShipRandom(computerGameBoard, "battleship", 4);
@@ -27,16 +38,15 @@ computer.placeShipRandom(computerGameBoard, "destroyer", 2);
 
 renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
 
-let clickEnabled = true;
-
-export function onClickFunction(i, j) {
-  if(clickEnabled) {
-    clickEnabled = false;
+let enemyClickEnabled = false;
+export function enemyOnClickFunction(i, j) {
+  if(enemyClickEnabled) {
+    enemyClickEnabled = false;
     joshua.sendAttack(computerGameBoard, i, j);
     renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
     if(computerGameBoard.checkIfAllSunk()){
       alert("Joshua wins");
-      clickEnabled = false;
+      enemyClickEnabled = false;
       return;
     }
     delay(100).then(() => {
@@ -44,11 +54,67 @@ export function onClickFunction(i, j) {
       renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
       if(joshuaGameBoard.checkIfAllSunk()){
         alert("Computer wins");
-        clickEnabled = false;
+        enemyClickEnabled = false;
         return;
       }
-      clickEnabled = true;   
+      enemyClickEnabled = true;   
     });
     
   }
+}
+
+let ownClickEnabled = 0;
+export function ownOnClickFunction(i, j) {
+  let flag = false;
+  switch(ownClickEnabled) {
+    case 0:
+      if(direction%2===0){
+        flag = joshuaGameBoard.placeShipHorizontally(i, j, 5, "carrier");
+      }
+      else{
+        flag = joshuaGameBoard.placeShipVertically(i, j, 5, "carrier");
+      }
+      break;
+    case 1:
+      if(direction%2===0){
+        flag = joshuaGameBoard.placeShipHorizontally(i, j, 4, "battleship");
+      }
+      else{
+        flag = joshuaGameBoard.placeShipVertically(i, j, 4, "battleship");
+      }
+      break;
+    case 2:
+      if(direction%2===0){
+        flag = joshuaGameBoard.placeShipHorizontally(i, j, 3, "cruiser");
+      }
+      else{
+        flag = joshuaGameBoard.placeShipVertically(i, j, 3, "cruiser");
+      }
+      break;
+    case 3:
+      if(direction%2===0){
+        flag = joshuaGameBoard.placeShipHorizontally(i, j, 3, "submarine");
+      }
+      else{
+        flag = joshuaGameBoard.placeShipVertically(i, j, 3, "submarine");
+      }
+      break;
+    case 4:
+      if(direction%2===0){
+        flag = joshuaGameBoard.placeShipHorizontally(i, j, 2, "destroyer");
+      }
+      else{
+        flag = joshuaGameBoard.placeShipVertically(i, j, 2, "destroyer");
+      }
+      enemyClickEnabled = true;
+      break;
+    default:
+      console.log("hello");
+  }
+
+  if(flag === "success"){
+    renderGameBoards(joshuaGameBoard.coordinates, computerGameBoard.coordinates);
+    ownClickEnabled++;
+  }
+  
 }

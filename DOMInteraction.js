@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle, import/extensions
-import {onClickFunction} from "./gameLogic.js";
+import {enemyOnClickFunction, ownOnClickFunction} from "./gameLogic.js";
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderGameBoards = (inputArray1, inputArray2) => {
@@ -11,6 +11,9 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
       switch(inputArray1[i][j]) {
         case null:
           myDiv.style.backgroundColor = "black";
+          myDiv.onclick = () => {
+            ownOnClickFunction(i, j);
+          };
           break;
         case "miss":
           myDiv.style.backgroundColor = "blue";
@@ -35,7 +38,7 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
         case null:
           myDiv.style.backgroundColor = "black";
           myDiv.onclick = () => {
-            onClickFunction(i, j);
+            enemyOnClickFunction(i, j);
           };
           break;
         case "miss":
@@ -49,7 +52,7 @@ export const renderGameBoards = (inputArray1, inputArray2) => {
         default:
           myDiv.style.backgroundColor = "black";
           myDiv.onclick = () => {
-            onClickFunction(i, j);
+            enemyOnClickFunction(i, j);
           };
       }
       rightGameBoard.appendChild(myDiv);
