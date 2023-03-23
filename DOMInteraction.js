@@ -1,7 +1,5 @@
 // eslint-disable-next-line import/no-cycle, import/extensions
 import {enemyOnClickFunction, ownOnClickFunction} from "./gameLogic.js";
-import { shipFactory } from "./ship.js";
-import { gameBoardFactory } from "./gameboard.js";
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderGameBoards = (gameboard1, gameboard2) => {
@@ -18,57 +16,46 @@ export const renderGameBoards = (gameboard1, gameboard2) => {
           };
           break;
         case "miss":
-          myDiv.style.backgroundColor = "white";
-          myDiv.innerText = "miss";
+          myDiv.style.backgroundColor = "lightblue";
           break;
         case "hitcarrier":
             if(gameboard1.arsenal[0].isSunk()){
-              myDiv.style.backgroundColor = "darkred";
-              myDiv.innerText = "sunk";
+              myDiv.style.backgroundColor = "darkgreen";
             }
             else{
               myDiv.style.backgroundColor = "red";
-              myDiv.innerText = "hit";
             }
             break;
         case "hitbattleship":
           if(gameboard1.arsenal[1].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitcruiser":
           if(gameboard1.arsenal[2].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitsubmarine":
           if(gameboard1.arsenal[3].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitdestroyer":
           if(gameboard1.arsenal[4].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;    
         default:
@@ -90,57 +77,46 @@ export const renderGameBoards = (gameboard1, gameboard2) => {
           };
           break;
         case "miss":
-          myDiv.style.backgroundColor = "white";
-          myDiv.innerText = "miss";
+          myDiv.style.backgroundColor = "lightblue";
           break;
         case "hitcarrier":
           if(gameboard2.arsenal[0].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;
         case "hitbattleship":
           if(gameboard2.arsenal[1].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitcruiser":
           if(gameboard2.arsenal[2].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitsubmarine":
           if(gameboard2.arsenal[3].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;  
         case "hitdestroyer":
           if(gameboard2.arsenal[4].isSunk()){
-            myDiv.style.backgroundColor = "darkred";
-            myDiv.innerText = "sunk";
+            myDiv.style.backgroundColor = "darkgreen";
           }
           else{
             myDiv.style.backgroundColor = "red";
-            myDiv.innerText = "hit";
           }
           break;
         default:

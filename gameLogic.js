@@ -10,7 +10,7 @@ function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
-
+// Make space bar switch direction of ship placement
 let direction = 2;
 document.body.onkeyup = function(e) {
   if (e.key == " " ||
@@ -21,14 +21,9 @@ document.body.onkeyup = function(e) {
   }
 };
 
-export const joshua = playerFactory("Joshua");
+export const player1 = playerFactory("player1");
 export const computer = playerFactory();
-export const joshuaGameBoard = gameBoardFactory();
-// joshua.placeShipRandom(joshuaGameBoard, "carrier", 5);
-// joshua.placeShipRandom(joshuaGameBoard, "battleship", 4);
-// joshua.placeShipRandom(joshuaGameBoard, "cruiser", 3);
-// joshua.placeShipRandom(joshuaGameBoard, "submarine", 3);
-// joshua.placeShipRandom(joshuaGameBoard, "destroyer", 2);
+export const player1GameBoard = gameBoardFactory();
 export const computerGameBoard = gameBoardFactory();
 computer.placeShipRandom(computerGameBoard, "carrier", 5);
 computer.placeShipRandom(computerGameBoard, "battleship", 4);
@@ -36,23 +31,23 @@ computer.placeShipRandom(computerGameBoard, "cruiser", 3);
 computer.placeShipRandom(computerGameBoard, "submarine", 3);
 computer.placeShipRandom(computerGameBoard, "destroyer", 2);
 
-renderGameBoards(joshuaGameBoard, computerGameBoard);
+renderGameBoards(player1GameBoard, computerGameBoard);
 
 let enemyClickEnabled = false;
 export function enemyOnClickFunction(i, j) {
   if(enemyClickEnabled) {
     enemyClickEnabled = false;
-    joshua.sendAttack(computerGameBoard, i, j);
-    renderGameBoards(joshuaGameBoard, computerGameBoard);
+    player1.sendAttack(computerGameBoard, i, j);
+    renderGameBoards(player1GameBoard, computerGameBoard);
     if(computerGameBoard.checkIfAllSunk()){
-      alert("Joshua wins");
+      alert("player1 wins");
       enemyClickEnabled = false;
       return;
     }
-    delay(100).then(() => {
-      computer.sendRandomAttack(joshuaGameBoard);
-      renderGameBoards(joshuaGameBoard, computerGameBoard);
-      if(joshuaGameBoard.checkIfAllSunk()){
+    delay(1000).then(() => {
+      computer.sendRandomAttack(player1GameBoard);
+      renderGameBoards(player1GameBoard, computerGameBoard);
+      if(player1GameBoard.checkIfAllSunk()){
         alert("Computer wins");
         enemyClickEnabled = false;
         return;
@@ -69,53 +64,51 @@ export function ownOnClickFunction(i, j) {
   switch(ownClickEnabled) {
     case 0:
       if(direction%2===0){
-        flag = joshuaGameBoard.placeShipHorizontally(i, j, 5, "carrier");
+        flag = player1GameBoard.placeShipHorizontally(i, j, 5, "carrier");
       }
       else{
-        flag = joshuaGameBoard.placeShipVertically(i, j, 5, "carrier");
+        flag = player1GameBoard.placeShipVertically(i, j, 5, "carrier");
       }
       break;
     case 1:
       if(direction%2===0){
-        flag = joshuaGameBoard.placeShipHorizontally(i, j, 4, "battleship");
+        flag = player1GameBoard.placeShipHorizontally(i, j, 4, "battleship");
       }
       else{
-        flag = joshuaGameBoard.placeShipVertically(i, j, 4, "battleship");
+        flag = player1GameBoard.placeShipVertically(i, j, 4, "battleship");
       }
       break;
     case 2:
       if(direction%2===0){
-        flag = joshuaGameBoard.placeShipHorizontally(i, j, 3, "cruiser");
+        flag = player1GameBoard.placeShipHorizontally(i, j, 3, "cruiser");
       }
       else{
-        flag = joshuaGameBoard.placeShipVertically(i, j, 3, "cruiser");
+        flag = player1GameBoard.placeShipVertically(i, j, 3, "cruiser");
       }
       break;
     case 3:
       if(direction%2===0){
-        flag = joshuaGameBoard.placeShipHorizontally(i, j, 3, "submarine");
+        flag = player1GameBoard.placeShipHorizontally(i, j, 3, "submarine");
       }
       else{
-        flag = joshuaGameBoard.placeShipVertically(i, j, 3, "submarine");
+        flag = player1GameBoard.placeShipVertically(i, j, 3, "submarine");
       }
       break;
     case 4:
       if(direction%2===0){
-        flag = joshuaGameBoard.placeShipHorizontally(i, j, 2, "destroyer");
+        flag = player1GameBoard.placeShipHorizontally(i, j, 2, "destroyer");
       }
       else{
-        flag = joshuaGameBoard.placeShipVertically(i, j, 2, "destroyer");
+        flag = player1GameBoard.placeShipVertically(i, j, 2, "destroyer");
       }
       enemyClickEnabled = true;
       document.getElementById("quick-tip").innerText = "";
       break;
     default:
-      console.log("hello");
+      console.log("...");
   }
-
   if(flag === "success"){
-    renderGameBoards(joshuaGameBoard, computerGameBoard);
+    renderGameBoards(player1GameBoard, computerGameBoard);
     ownClickEnabled++;
   }
-  
 }
